@@ -7,6 +7,7 @@ import dash_bootstrap_components as dbc
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+from PIL import Image
 # from main import *
 
 #inisiasi aplikasi
@@ -24,16 +25,15 @@ df_outflow = pd.read_csv(url_outflow)
 
 
 #membangun komponen
-header = html.H1("Aplikasi Simulasi Kapasitas Embung B ITERA", style={'textAlign': 'center', "height":"100 px", "background-color":"pink"})
-subtitle = html.H5("Tugas Besar Kapita Selekta Matematika Komputasi (KELOMPOK 3)", style={'textAlign': 'center', "height":"3 px", "background-color":"lightblue"})
-footer = html.Div([html.H1("Institut Teknologi Sumatera"),html.H5("Jl. Terusan Ryacudu, Way Huwi, Kec. Jati Agung, Kabupaten Lampung Selatan, Lampung 35365"), html.P("Zessica Nainggolan | Christina Jheovani| Ayumi Rima| Alviolita Br.Barus | Yanti Marito| Holi Safira| Jesika Ginting"), html.P("created @ 2022 by|072|")], style={'textAlign': 'center', "height":"3 px", "background-color":"pink"})
+header = html.H1("Aplikasi Simulasi Kapasitas Embung", style={'textAlign': 'center'})
+subtitle = html.H2("MK Kapita Selekta Matematika Komputasi (MA4103)", style={'textAlign': 'center'})
 inflow_fig = go.FigureWidget()
-inflow_fig.add_scatter(name='Inflow', x=df_inflow['Bulan'], y=df_inflow['Data-masuk'])
-inflow_fig.layout.title = 'Plot Air Yang Masuk'
+inflow_fig.add_scatter(name='nflow', x=df_inflow['Bulan'], y=df_inflow['Data-masuk'])
+inflow_fig.layout.title = 'Inflow'
 
 outflow_fig = go.FigureWidget()
 outflow_fig.add_scatter(name='Outflow', x=df_outflow['Bulan'], y=df_outflow['Data-keluar'])
-outflow_fig.layout.title = 'Plot Air Yang Keluar'
+outflow_fig.layout.title = 'Outflow'
 
 simulation_fig = go.FigureWidget()
 # simulation_fig.add_scatter(name='Outflow', x=df_outflow['Bulan'], y=df_outflow['Data'])
@@ -52,17 +52,16 @@ app.layout = html.Div(
             ),
         html.Div(
             [
-                html.Button('find results', id='run-button', n_clicks=0)
+                html.Button('Run', id='run-button', n_clicks=0)
             ],
             style = {'textAlign': 'center'}
         ), 
-        html.Div(id='output-container-button', children='Klik "find results" untuk menjalankan simulasi.', style = {'textAlign': 'center'}),
+        html.Div(id='output-container-button', children='Klik run untuk menjalankan simulasi.', style = {'textAlign': 'center'}),
         dbc.Row(
             [
                 dbc.Col([dcc.Graph(id='simulation-result', figure=simulation_fig)])
             ]
-        ),
-        footer
+        )
     ]
     
 )
@@ -78,10 +77,10 @@ def graph_update(n_clicks):
     # filtering based on the slide and dropdown selection
     if n_clicks >=1:
         #program numerik ---start----
-        inout = df_inflow["Data-masuk"].values - df_outflow["Data-keluar"].values
+        inout = df_inflow["Data"].values - df_outflow["Data"].values
         N = len(inout)
-        u = np.zeros(N)
-        u0 = 11840
+        u = np.zeros
+        u0 = 4000
         u[0] = u0
         dt = 1
 
@@ -107,9 +106,5 @@ def graph_update(n_clicks):
 
 
 #jalankan aplikasi
-if __name__ == '__main__':
+if __name__ == '_main_':
     app.run_server()
-
-
-#debug=True, port=00
-

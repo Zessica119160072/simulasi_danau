@@ -109,7 +109,7 @@ def graph_update(n_clicks):
         return simulation_fig
     else:
         simulation_fig = go.FigureWidget()
-        simulation_fig.layout.title = 'Simulasi Kapasitas Embung E ITERA '
+        simulation_fig.layout.title = 'Simulasi Kapasitas Embung B ITERA '
 
         return simulation_fig
 
